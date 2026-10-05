@@ -1,0 +1,79 @@
+<html>
+  <head>
+    <title>
+      NIHIL SINGH
+    </title>
+    <style>
+      body {
+        background-color: lightblue;
+      }
+      #firstspace {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="text-align: center;
+    color: yellow
+    ">
+      <h2><i>MY CALCULATOR</i></h2>
+
+    </div>
+    <div style= "text-align: center;">
+      <input id ="num1" type="number" placeholder="Enter first number:" style="width: 200px;height: 40px">
+      <br>
+      <br>
+     
+      <input id ="num2" type="number" placeholder="Enters econd number:" style="width: 200px;height: 40px">
+      
+    </div>
+    <div style="text-align: center"> 
+      <br>
+      <br>
+
+      <select id="operation" style="width: 100px; height: 40px;">
+  <option>+</option>
+  <option>-</option>
+  <option>/</option>
+  <option>*</option>
+</select>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div style="text-align: center;">
+    <button onclick="calculate()" style="background-color:red; color:black;">RESULT</button>
+    </div>
+
+    
+    <script>
+    function calculate(){
+      let num1 = Number(document.getElementById("num1").value);
+      let num2 = Number(document.getElementById("num2").value);
+      let operation = document.getElementById("operation").value;
+
+      let result;
+
+    if (operation == '+'){
+        result = num1 + num2;
+
+    } else if (operation == '-'){
+        result = num1 - num2;
+
+    } else if (operation == '*'){
+        result = num1 * num2;
+
+    } else if (operation == '/'){
+        if (num2 == 0){
+            alert("invalid case");
+            return;
+        } else {
+            result = num1 / num2;
+        }
+    }
+
+    alert(result);
+  }
+    </script>
+  </body>
+</html>
