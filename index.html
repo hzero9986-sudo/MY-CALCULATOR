@@ -1,79 +1,397 @@
 <html>
   <head>
-    <title>
-      NIHIL SINGH
-    </title>
+    <title>NIHIL SINGH</title>
+
     <style>
       body {
         background-color: lightblue;
       }
+
       #firstspace {
         text-align: center;
       }
+
+      #history {
+        width: 300px;
+        margin: 20px auto;
+        text-align: left;
+        background-color: white;
+        padding: 10px;
+        display: none;
+      }
+
+      #history h3 {
+        text-align: center;
+      }
+
+      .history-item {
+        padding: 5px;
+        border-bottom: 1px solid gray;
+      }
     </style>
   </head>
+
   <body>
-    <div style="text-align: center;
-    color: yellow
-    ">
+
+    <div style="text-align: center; color: yellow;">
       <h2><i>MY CALCULATOR</i></h2>
+    </div>
 
-    </div>
-    <div style= "text-align: center;">
-      <input id ="num1" type="number" placeholder="Enter first number:" style="width: 200px;height: 40px">
-      <br>
-      <br>
-     
-      <input id ="num2" type="number" placeholder="Enters econd number:" style="width: 200px;height: 40px">
-      
-    </div>
-    <div style="text-align: center"> 
-      <br>
-      <br>
-
-      <select id="operation" style="width: 100px; height: 40px;">
-  <option>+</option>
-  <option>-</option>
-  <option>/</option>
-  <option>*</option>
-</select>
-    </div>
-    <br>
-    <br>
-    <br>
     <div style="text-align: center;">
-    <button onclick="calculate()" style="background-color:red; color:black;">RESULT</button>
+      <input
+        type="text"
+        placeholder="Enter first number:"
+        style="width: 200px; height: 40px"
+        id="display"
+        readonly
+      >
+      <br><br>
     </div>
 
-    
+
+    <!-- ROW 1 -->
+    <div style="text-align: center;">
+      <button onclick="addToDisplay('0')" style="background-color:blue;color:pink;width:70px;height:60px;">0</button>
+
+      <button onclick="addToDisplay('1')" style="background-color:blue;color:pink;width:70px;height:60px;">1</button>
+
+      <button onclick="addToDisplay('2')" style="background-color:blue;color:pink;width:70px;height:60px;">2</button>
+
+      <button onclick="addToDisplay('+')" style="background-color:blue;color:pink;width:70px;height:60px;">+</button>
+    </div>
+
+
+    <!-- ROW 2 -->
+    <div style="text-align: center;">
+      <button onclick="addToDisplay('3')" style="background-color:blue;color:pink;width:70px;height:60px;">3</button>
+
+      <button onclick="addToDisplay('4')" style="background-color:blue;color:pink;width:70px;height:60px;">4</button>
+
+      <button onclick="addToDisplay('5')" style="background-color:blue;color:pink;width:70px;height:60px;">5</button>
+
+      <button onclick="addToDisplay('/')" style="background-color:blue;color:pink;width:70px;height:60px;">/</button>
+    </div>
+
+
+    <!-- ROW 3 -->
+    <div style="text-align: center;">
+      <button onclick="addToDisplay('6')" style="background-color:blue;color:pink;width:70px;height:60px;">6</button>
+
+      <button onclick="addToDisplay('7')" style="background-color:blue;color:pink;width:70px;height:60px;">7</button>
+
+      <button onclick="addToDisplay('8')" style="background-color:blue;color:pink;width:70px;height:60px;">8</button>
+
+      <button onclick="addToDisplay('-')" style="background-color:blue;color:pink;width:70px;height:60px;">-</button>
+    </div>
+
+
+    <!-- ROW 4 -->
+    <div style="text-align: center;">
+      <button onclick="addToDisplay('9')" style="background-color:blue;color:pink;width:70px;height:60px;">9</button>
+
+      <!-- AC = Clear display -->
+      <button onclick="clearDisplay()" style="background-color:blue;color:pink;width:150px;height:60px;">
+        AC
+      </button>
+
+      <button onclick="calculate()" style="background-color:blue;color:pink;width:70px;height:60px;">
+        =
+      </button>
+    </div>
+
+
+    <!-- ROW 5 -->
+    <div style="text-align: center;">
+      <button onclick="addToDisplay('*')" style="background-color:blue;color:pink;width:70px;height:60px;">
+        *
+      </button>
+
+      <!-- HISTORY BUTTON -->
+      <button onclick="showHistory()" style="background-color:blue;color:pink;width:220px;height:60px;">
+        HISTORY
+      </button>
+    </div>
+
+
+    <br>
+
+
+    <!-- RESULT BUTTON -->
+    <div style="text-align: center;">
+      <button onclick="calculate()" style="background-color:red;color:black;">
+        RESULT
+      </button>
+    </div>
+
+
+    <!-- HISTORY AREA -->
+    <div id="history">
+
+      <h3>Calculation History</h3>
+
+      <div id="historyList"></div>
+
+      <br>
+
+      <!-- CLEAR HISTORY BUTTON -->
+      <div style="text-align:center;">
+        <button onclick="clearHistory()" style="background-color:red;color:white;">
+          CLEAR HISTORY
+        </button>
+      </div>
+
+    </div>
+
+
     <script>
-    function calculate(){
-      let num1 = Number(document.getElementById("num1").value);
-      let num2 = Number(document.getElementById("num2").value);
-      let operation = document.getElementById("operation").value;
 
-      let result;
+      // ==========================================
+      // ADD NUMBER / OPERATOR TO DISPLAY
+      // ==========================================
 
-    if (operation == '+'){
-        result = num1 + num2;
+      function addToDisplay(value) {
 
-    } else if (operation == '-'){
-        result = num1 - num2;
+        document.getElementById("display").value += value;
 
-    } else if (operation == '*'){
-        result = num1 * num2;
+      }
 
-    } else if (operation == '/'){
-        if (num2 == 0){
-            alert("invalid case");
-            return;
-        } else {
-            result = num1 / num2;
+
+      // ==========================================
+      // CLEAR CURRENT DISPLAY
+      // ==========================================
+
+      function clearDisplay() {
+
+        document.getElementById("display").value = "";
+
+      }
+
+
+      // ==========================================
+      // CALCULATE
+      // ==========================================
+
+      function calculate() {
+
+        let string = document.getElementById("display").value;
+
+        if (string === "") {
+          alert("Please enter a calculation");
+          return;
         }
-    }
 
-    alert(result);
-  }
+
+        // Find operator
+
+        let operation = "";
+
+        if (string.includes("+")) {
+          operation = "+";
+        }
+
+        else if (string.includes("-")) {
+          operation = "-";
+        }
+
+        else if (string.includes("*")) {
+          operation = "*";
+        }
+
+        else if (string.includes("/")) {
+          operation = "/";
+        }
+
+        else {
+          alert("Please enter an operation");
+          return;
+        }
+
+
+        // Split numbers
+
+        let numbers = string.split(operation);
+
+
+        let num1 = Number(numbers[0]);
+        let num2 = Number(numbers[1]);
+
+
+        // Check numbers
+
+        if (isNaN(num1) || isNaN(num2)) {
+
+          alert("Invalid calculation");
+
+          return;
+        }
+
+
+        let result;
+
+
+        // ADDITION
+
+        if (operation == "+") {
+
+          result = num1 + num2;
+
+        }
+
+
+        // SUBTRACTION
+
+        else if (operation == "-") {
+
+          result = num1 - num2;
+
+        }
+
+
+        // MULTIPLICATION
+
+        else if (operation == "*") {
+
+          result = num1 * num2;
+
+        }
+
+
+        // DIVISION
+
+        else if (operation == "/") {
+
+          if (num2 == 0) {
+
+            alert("Cannot divide by zero");
+
+            return;
+
+          }
+
+          result = num1 / num2;
+
+        }
+
+
+        // ==========================================
+        // SAVE CALCULATION TO LOCAL STORAGE
+        // ==========================================
+
+        saveHistory(string + " = " + result);
+
+
+        // Show result
+
+        document.getElementById("display").value = result;
+
+      }
+
+
+      // ==========================================
+      // SAVE HISTORY
+      // ==========================================
+
+      function saveHistory(calculation) {
+
+        // Get old history
+
+        let history = JSON.parse(
+          localStorage.getItem("calculatorHistory")
+        ) || [];
+
+
+        // Add new calculation
+
+        history.push(calculation);
+
+
+        // Save it again
+
+        localStorage.setItem(
+          "calculatorHistory",
+          JSON.stringify(history)
+        );
+
+      }
+
+
+      // ==========================================
+      // SHOW HISTORY
+      // ==========================================
+
+      function showHistory() {
+
+        let historyBox = document.getElementById("history");
+
+        let historyList = document.getElementById("historyList");
+
+
+        // Get history from localStorage
+
+        let history = JSON.parse(
+          localStorage.getItem("calculatorHistory")
+        ) || [];
+
+
+        // Clear old HTML
+
+        historyList.innerHTML = "";
+
+
+        // If no history
+
+        if (history.length === 0) {
+
+          historyList.innerHTML = "<p>No history yet.</p>";
+
+        }
+
+
+        // Display history
+
+        else {
+
+          history.forEach(function(calculation) {
+
+            let item = document.createElement("div");
+
+            item.className = "history-item";
+
+            item.textContent = calculation;
+
+            historyList.appendChild(item);
+
+          });
+
+        }
+
+
+        // Show history box
+
+        historyBox.style.display = "block";
+
+      }
+
+
+      // ==========================================
+      // CLEAR COMPLETE HISTORY
+      // ==========================================
+
+      function clearHistory() {
+
+        // Delete history from localStorage
+
+        localStorage.removeItem("calculatorHistory");
+
+
+        // Clear history on screen
+
+        document.getElementById("historyList").innerHTML =
+          "<p>No history yet.</p>";
+
+      }
+
     </script>
+
   </body>
 </html>
